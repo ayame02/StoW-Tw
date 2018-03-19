@@ -4,6 +4,7 @@
 }
 body {
     font-family: Verdana;
+    background : url("images/mainBackground2.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -20,10 +21,9 @@ body {
 
 .upper_menu{
     position: absolute;
-    left: 85%;
+    left: 80%;
     margin-top: 3%;
-    margin-right: 1%;
-    width: 50%;
+    width: 16%;
     overflow: hidden;
 }
 
@@ -32,9 +32,10 @@ body {
     color: white;
     background: black;
     text-align: center;
-    padding: 1%;
+    padding: 2%;
     text-decoration: none;
     border-radius: 10%; 
+    margin-right: 2%;
 }
 
 .sidenav {

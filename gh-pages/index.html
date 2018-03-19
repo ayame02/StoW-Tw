@@ -5,26 +5,106 @@
         <meta charset="UTF-8">
         <link rel = "stylesheet" href = "styles.css">
     </head>
-    <body background = "images/mainBackground.jpg">
-        <img class = "logged_in" src = "images/standard_prof_img.png" alt = "Profile icon">
-        <form>
-            <input type = "submit" value = "Upload story">
-            Username:
-            <input type = "text">
-            Password:
-            <input type = "password">
-            <input type = "submit" value = "Log in">
-            <span> Don't have an account? Sign up </span><a href = "signUp.html">here</a>
-        </form>
+    <body background = "images/mainBackground2.jpg">
+        <img src = "images/logo.png" class = "logo">
+        <div class = "upper_menu">
+            <a href = "upload.html">Upload</a>
+            <a href = "login.html">Login</a>
+            <a href = "signUp.html">Sign up</a>
+        </div> 
         <div class = "sidenav">
-            Stories from around the world.
-            X Story uploaded by [Sandy].
+            <section>
+                <p class = "sidenav_bullet">Stories from around the world.</p>
+                <p class = "stories"><a href = "storySandy.html">A little mouse</a>, uploaded by [Sandy].</p>
+                <p class = "stories"><a href = "">The cat and the dog</a>, uploaded by [Carol]</p>
+            </section>
+            <br>
+            <p class = "sidenav_bullet"></p>
+            <div class="month">      
+                <ul>
+                  <li class="prev">&#10094;</li>
+                  <li class="next">&#10095;</li>
+                  <li>
+                    March<br>
+                    <span style="font-size:18px">2018</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <ul class="weekdays">
+                <li>Mo</li>
+                <li>Tu</li>
+                <li>We</li>
+                <li>Th</li>
+                <li>Fr</li>
+                <li>Sa</li>
+                <li>Su</li>
+              </ul>
+              
+              <ul class="days">  
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+                <li>9</li>
+                <li>10</li>
+                <li>11</li>
+                <li>12</li>
+                <li>13</li>
+                <li>14</li>
+                <li>15</li>
+                <li>16</li>
+                <li>17</li>
+                <li>18</li>
+                <li>19</li>
+                <li><span class="active">20</span></li>
+                <li>21</li>
+                <li>22</li>
+                <li>23</li>
+                <li>24</li>
+                <li>25</li>
+                <li>26</li>
+                <li>27</li>
+                <li>28</li>
+                <li>29</li>
+                <li>30</li>
+                <li>31</li>
+              </ul>
         </div>
-        <section>
-            <div>Age 3-5 here</div>
-            <div>Age 6-8 here</div>
-            <div>Age 8-12 here</div>
-            <div>Age 13+ here</div>
+        <section class = "site_content">
+            <div class = "age_section">Ages 3-5</div>
+            <div>    
+                <div class = "story">
+                        <img src="images/hanselandgretel.jpg" class = "story_image">
+                        <a href = "HanselAndGretel.html" class ="story_title">Hansel and Gretel</a>
+                        <p class = "story_author">By Amanda Askew</p>
+                        <p class = "story_description">Hansel and Gretel are the children of a poor woodcutter.
+                             When a great famine settles over the land, the woodcutter's wife decides to take the 
+                             children into the woods and leave them there to fend for themselves, so that she and 
+                             her husband do not starve to death, because the children eat too much.</p>
+                </div>
+                <div class = "story">
+                    <img src="images/thelittlemermaid.jpg" class = "story_image">
+                    <a href = "TheLittleMermaid.html" class = "story_title">The Little Mermaid</a>
+                    <p class = "story_author">By Michael Teitelbaum</p>
+                    <p class = "story_description">
+                        The Little Mermaid dwells in an underwater kingdom with her widowed father (the sea king or Mer-King), 
+                        her dowager grandmother, and her five older sisters, each of whom had been born one year apart. 
+                        When a mermaid turns fifteen, she is permitted to swim to the surface for the first time to glimpse the 
+                        world above, and when the sisters become old enough, each of them visits the upper world one at a time 
+                        every year. As each returns, the Little Mermaid listens longingly to their various descriptions of the 
+                        world inhabited by human beings.
+                    </p>
+                </div>
+                
+            </div>
+            <div class = "age_section">Ages 6-8 </div>
+            <div class = "age_section">Ages 8-12 </div>
+            <div class = "age_section">Ages 13+</div>
         </section>
     </body>
 </html>

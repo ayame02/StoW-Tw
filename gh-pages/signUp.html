@@ -1,27 +1,84 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Stories on the web</title>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <form>
-            <p>Welcome, to sign up please ask a parent if you don't understand.</p>
-            If you have an account, please sign in <a href="SimpleLogin.html"> here</a>.
-            <p>First name: </p>
-            <input type = "text">
-            <p>Last name: </p>
-            <input type = "text">
-            <p>Nickname:</p>
-            <input type = "text">
-            <p>Username:</p>
-            <input type = "text">
-            <p>Password:</p>
-            <input type = "password">
-            <p>Confirm password:</p>
-            <input type = "password">
-            <p></p>
-            <input type ="submit" value = "Sign up">
-        </form>
-    </body>
+<html lang="en">
+
+<head>
+    <title>Stories on the web</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <img src="images/logo.png" class="logo">
+    <div class="upper_menu_signUp">
+        <a href="index.html">Home</a>
+    </div>
+    <form class="form_sign_up">
+        <p class="form_warning">Welcome, to sign up please ask a parent if you don't understand.</p>
+        <br>
+        <span>If you have an account, please sign in
+            <a href="SimpleLogin.html"> here</a>.</span>
+        <br>
+        <br>
+        <div class="form_sign_up_row">
+            <div class="form_sign_up_labels">
+                <label>First Name</label>
+            </div>
+            <div class="form_sign_up_inputs">
+                <input type="text" placeholder="Your name..">
+            </div>
+        </div>
+
+        <div class="form_sign_up_row">
+            <div class="form_sign_up_labels">
+                <label>Last Name</label>
+            </div>
+            <div class="form_sign_up_inputs">
+                <input type="text" placeholder="Your last name..">
+            </div>
+        </div>
+
+        <div class="form_sign_up_row">
+            <div class="form_sign_up_labels">
+                <label>Nickname</label>
+            </div>
+            <div class="form_sign_up_inputs">
+                <textarea></textarea>
+            </div>
+        </div>
+
+        <div class="form_sign_up_row">
+            <div class="form_sign_up_labels">
+                <label>Username</label>
+            </div>
+            <div class="form_sign_up_inputs">
+                <textarea placeholder="Your username.."></textarea>
+            </div>
+        </div>
+
+        <div class="form_sign_up_row">
+            <div class="form_sign_up_labels">
+                <label>Password</label>
+            </div>
+            <div class="form_sign_up_inputs">
+                <input type="password" placeholder="Your password..">
+            </div>
+        </div>
+
+        <div class="form_sign_up_row">
+            <div class="form_sign_up_labels">
+                <label>Confirm Password</label>
+            </div>
+            <div class="form_sign_up_inputs">
+                <input type="password">
+            </div>
+        </div>
+        <br>
+        <div class="form_sign_up_row">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</body>
+
 </html>

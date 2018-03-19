@@ -193,3 +193,36 @@ ul {
     background: rgb(27, 220, 249);
     color: white !important
 }
+
+.imagine {
+	position:fixed;
+	left:50%;
+	top:10%;
+	padding-top:4%;
+	width:45%;
+	height:55%
+}
+
+.lista_informatii{
+	
+	position:fixed;
+	left:50%;
+	top:80%;
+	text-align: center;
+	font-weight: bold;
+}
+
+.poveste{
+	margin: 5%;
+	padding: 2%;
+	background: #eee;
+	position:absolute;
+	right:50%;
+	font-style: italic
+}
+
+.titlu_poveste{
+	margin: 2%;
+	font-weight: bold;
+	font-style: italic;
+}

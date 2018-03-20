@@ -775,3 +775,15 @@ time.icon span {
 	font-weight: bold;
 	font-style: italic;
 }
+
+.lista_informatii_video{
+	margin:1%;
+}
+
+.video_poveste{
+	position:absolute;
+	margin-left:20%;
+	margin-top:5%;
+	width:60%;
+	height:70%;
+}

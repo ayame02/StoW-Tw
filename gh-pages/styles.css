@@ -379,11 +379,6 @@ time.icon span {
         top: 1%;
         height: 15%;
     }
-    background: url("images/mainBackground2.jpg") no-repeat center center fixed;
-	-webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 
 }
 
@@ -406,12 +401,6 @@ time.icon span {
         top: 1%;
         height: 15%;
     }
-    background: url("images/mainBackground2.jpg") no-repeat center center fixed;
-	    -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-
 }
 
 @media screen and (max-width: 816px) {

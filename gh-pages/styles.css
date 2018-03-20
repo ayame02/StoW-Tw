@@ -379,6 +379,7 @@ time.icon span {
         top: 1%;
         height: 15%;
     }
+    background: url("images/mainBackground2.jpg") no-repeat center center fixed;
 }
 
 @media screen and (max-width: 1024px){
@@ -400,6 +401,7 @@ time.icon span {
         top: 1%;
         height: 15%;
     }
+    background: url("images/mainBackground2.jpg") no-repeat center center fixed;
 }
 
 @media screen and (max-width: 816px) {

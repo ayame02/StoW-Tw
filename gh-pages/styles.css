@@ -5,11 +5,11 @@
 
 body {
     font-family: Verdana;
-    background: url("images/mainBackground2.jpg")  no-repeat center center fixed;
-    -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    background: url("images/mainBackground2.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .logo {

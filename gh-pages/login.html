@@ -1,19 +1,61 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Stories on the web</title>
-        <meta charset="UTF-8">
-        <link rel = "stylesheet" href = "styles.css">
-    </head>
-    <body>
-        <form>
-            <input type = "submit" value = "Upload story">
-            Username:
-            <input type = "text">
-            Password:
-            <input type = "password">
-            <input type = "submit" value = "Log in">
-            <span> Don't have an account? Sign up </span><a href = "signUp.html">here</a>
-        </form>
-    </body>
+<html lang="en">
+
+<head>
+    <title>Stories on the web</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <img src="images/logo.png" class="logo">
+    <div class="upper_menu_login">
+        <a href="index.html">Home</a>
+    </div>
+
+    <form class="form_login" action="login.php" method="POST">
+        <p> Welcome back! We can't wait for you to continue reading from where you left off!</p>
+        <br>
+        <div class="form_sign_up_row">
+            <div class="form_sign_up_labels">
+                <label>Username</label>
+            </div>
+            <div class="form_sign_up_inputs">
+                <input type="text" name="username">
+                <?php
+						if (isset($_POST["username"])){
+								$value_to_pass = $_POST["username"];
+								$_SESSION["username"] = $value_to_pass;
+						}
+				?>
+            </div>
+        </div>
+
+        <div class="form_sign_up_row">
+            <div class="form_sign_up_labels">
+                <label>Password</label>
+            </div>
+            <div class="form_sign_up_inputs">
+                <input type="password" name="password">
+                <?php
+						if (isset($_POST["password"])){
+							$user_value = $_POST["password"];
+							$_SESSION["password"] = $user_value;
+						}
+					
+				?>
+            </div>
+        </div>
+        <div class="form_sign_up_row">
+            <input type="submit" value="Login">
+        </div>
+        <br>
+        <span> Don't have an account? Sign up
+            <a href="signUp.html">here</a>.</span>
+    </form>
+</body>
+
 </html>

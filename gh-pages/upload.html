@@ -14,12 +14,12 @@
     <div class="upper_menu_login">
         <a href="index.html">Home</a>
     </div>
-    <form class = "form_login">
+    <form class = "form_login" action="upload.php" method="POST">
         <h3>File must be JSON/XML format. </h3>
         <h3>And it must contain a field with the title.</h3><br>
         <h2>Select a file to upload:</h2>
         <br>
-        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="file" name="fileToUpload">
         <div class = "form_sign_up_row">
             <input type="submit" value="Upload File" name="submit">
         </div>

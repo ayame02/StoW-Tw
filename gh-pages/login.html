@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,10 +13,10 @@
 <body>
     <img src="images/logo.png" class="logo">
     <div class="upper_menu_login">
-        <a href="loggedIn.html">Home</a>
+        <a href="index.html">Home</a>
     </div>
 
-    <form class="form_login">
+    <form class="form_login" action="login.php" method="POST">
         <p> Welcome back! We can't wait for you to continue reading from where you left off!</p>
         <br>
         <div class="form_sign_up_row">
@@ -23,7 +24,13 @@
                 <label>Username</label>
             </div>
             <div class="form_sign_up_inputs">
-                <textarea></textarea>
+                <input type="text" name="username">
+                <?php
+						if (isset($_POST["username"])){
+								$value_to_pass = $_POST["username"];
+								$_SESSION["username"] = $value_to_pass;
+						}
+				?>
             </div>
         </div>
 
@@ -32,7 +39,14 @@
                 <label>Password</label>
             </div>
             <div class="form_sign_up_inputs">
-                <input type="password">
+                <input type="password" name="password">
+                <?php
+						if (isset($_POST["password"])){
+							$user_value = $_POST["password"];
+							$_SESSION["password"] = $user_value;
+						}
+					
+				?>
             </div>
         </div>
         <div class="form_sign_up_row">

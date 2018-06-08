@@ -423,6 +423,32 @@ time.icon span {
 	margin: 2%;
 	font-weight: bold;
 	font-style: italic;
+	color: rgb(247, 143, 233);
+}
+
+.lista_informatii_video{
+	margin:1%;
+}
+
+.video_poveste{
+	position:absolute;
+	margin-left:20%;
+	margin-top:5%;
+	width:60%;
+	height:70%;
+}
+
+.despre{
+    clear: left;
+    margin: 1%;
+    border: solid black;
+    border-top: 1px;
+    border-left: 1px;
+    border-right: 1px;
+    padding: 1%;
+    font-size: 120%;
+    font-weight: bold;
+    color: rgb(244, 158, 66);
 }
 
 @media screen and (max-width: 1366px)

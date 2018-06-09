@@ -15,6 +15,7 @@
 				$pass = $_POST['password'];
 				if (isset($_POST['username']) and isset($_POST['password'])){
 					if ($db->users_check($usernm, $pass) === 1){
+						$_SESSION["username"] = $usernm;
 						echo ("<h2>Login success...Redirecting.</h2>");
 						header ('Refresh: 2; URL=loggedIn.html');
 					}

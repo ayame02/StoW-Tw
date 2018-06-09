@@ -13,9 +13,9 @@ CREATE TABLE story(
 	story_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	title VARCHAR(256) NOT NULL,
 	main_author VARCHAR(256),
-	secondary_authors JSON, 
-	characters JSON,
-	media_link JSON,
+	secondary_authors BLOB, 
+	characters BLOB,
+	media_link VARCHAR(256),
 	story_image VARCHAR(256)
 );
 
@@ -24,7 +24,7 @@ CREATE TABLE story(
 CREATE TABLE profile(
 	user_id INT(4) NOT NULL PRIMARY KEY,
 	general_pres TEXT,
-	family_members JSON,
+	family_members VARCHAR(256),
 	favorite_stories INT
 );
 

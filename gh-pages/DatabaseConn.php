@@ -63,6 +63,53 @@
 					return 1;
 				return 0;
 			}
+			public function return_details($user){
+				$sql = "select first_name, last_name, nickname from users where username = '$user'";
+				$result = mysqli_query($this->mysql_con, $sql);
+				$user_data = mysqli_fetch_assoc ($result);
+				$_SESSION["firstName"] = $user_data["first_name"];
+				$_SESSION["lastName"] = $user_data["last_name"];
+				$_SESSION["nickname"] = $user_data["nickname"];
+				
+			}
+
+			public function update_profile($user, $lastName , $firstName , $nickname){
+
+				$sql = "update users set last_name = '$lastName', first_name = '$firstName', nickname = '$nickname' where username = '$user'";
+
+				$result = mysqli_query($this->mysql_con, $sql);
+				header('Location: profile.php');
+
+			}
+
+			public function get_fav_story($user)
+			{
+				$sql = "select title, story_image, main_author from story where story_id = (select favorite_stories from profile where user_id = (select user_id from users where username = '$user'))";
+				$result = mysqli_query($this->mysql_con, $sql);
+				$user_data = mysqli_fetch_assoc ($result);
+				$_SESSION["title"] = $user_data["title"];
+				$_SESSION["url"] = $user_data["story_image"];
+				$_SESSION["author"] = $user_data["main_author"];
+			}
 			
+			public function delete_fav($user)
+			{
+				$sql = "update profile set favorite_stories = NULL where user_id = (select user_id from users where username = '$user')";
+				$result = mysqli_query($this->mysql_con, $sql);
+			}
+
+			public function get_family($user)
+			{
+				$sql = "select family_members from profile where user_id = (select user_id from users where username = '$user')";
+				$result = mysqli_query($this->mysql_con, $sql);			
+				$user_data = mysqli_fetch_assoc ($result);
+				$_SESSION["family"] = $user_data["family_members"];	
+			}
+
+			public function set_family($user, $family)
+			{
+				$sql = "update profile set family_members = '$family' where user_id = (select user_id from users where username = '$user')";
+				$result = mysqli_query($this->mysql_con, $sql);
+			}
 	}
 ?>

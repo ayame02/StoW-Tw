@@ -15,7 +15,8 @@ CREATE TABLE story(
 	main_author VARCHAR(256),
 	secondary_authors JSON, //inserarea se face cu INSERT INTO story VALUES(1231, 'blabla', '', '["author1","author2"]');
 	characters JSON,
-	media_link JSON //in caz de sunt mai multe linkuri
+	media_link JSON, //in caz de sunt mai multe linkuri
+	story_image VARCHAR(256)
 );
 
 /
@@ -24,7 +25,7 @@ CREATE TABLE profile(
 	user_id INT(4) NOT NULL PRIMARY KEY,
 	general_pres TEXT,
 	family_members JSON,
-	favorite_stories JSON
+	favorite_stories INT
 );
 
 /

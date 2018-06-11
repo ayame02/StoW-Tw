@@ -12,11 +12,24 @@ CREATE TABLE users(
 CREATE TABLE story(
 	story_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	title VARCHAR(256) NOT NULL,
-	main_author VARCHAR(256),
-	secondary_authors BLOB, 
 	characters BLOB,
 	media_link VARCHAR(256),
 	story_image VARCHAR(256)
+);
+
+/
+
+CREATE TABLE book_authors(
+	story_id INT(4) NOT NULL,
+	author_id INT(4) NOT NULL
+);
+
+/
+
+CREATE TABLE authors(
+	id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(256) NOT NULL,
+	role VARCHAR(256) NOT NULL
 );
 
 /

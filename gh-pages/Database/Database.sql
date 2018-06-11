@@ -12,8 +12,6 @@ CREATE TABLE users(
 CREATE TABLE story(
 	story_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	title VARCHAR(256) NOT NULL,
-	characters BLOB,
-	media_link VARCHAR(256),
 	story_image VARCHAR(256),
 	reccomended_age INT(4)
 );
@@ -48,6 +46,20 @@ CREATE TABLE characters(
 	role VARCHAR(256) NOT NULL,
 	personality VARCHAR(256),
 	minor_description VARCHAR(256)
+);
+
+/
+
+CREATE TABLE book_links(
+	story_id INT NOT NULL,
+	media_id INT NOT NULL
+);
+
+/
+
+CREATE TABLE media_links(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	url VARCHAR(256)
 );
 
 /

@@ -14,28 +14,46 @@ CREATE TABLE story(
 	title VARCHAR(256) NOT NULL,
 	characters BLOB,
 	media_link VARCHAR(256),
-	story_image VARCHAR(256)
+	story_image VARCHAR(256),
+	reccomended_age INT(4)
 );
 
 /
 
 CREATE TABLE book_authors(
-	story_id INT(4) NOT NULL,
-	author_id INT(4) NOT NULL
+	story_id INT NOT NULL,
+	author_id INT NOT NULL
 );
 
 /
 
 CREATE TABLE authors(
-	id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	name VARCHAR(256) NOT NULL,
 	role VARCHAR(256) NOT NULL
 );
 
 /
 
+CREATE TABLE book_characters(
+	story_id INT NOT NULL,
+	char_id INT NOT NULL
+);
+
+/
+
+CREATE TABLE characters(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(256) NOT NULL,
+	role VARCHAR(256) NOT NULL,
+	personality VARCHAR(256),
+	minor_description VARCHAR(256)
+);
+
+/
+
 CREATE TABLE profile(
-	user_id INT(4) NOT NULL PRIMARY KEY,
+	user_id INT NOT NULL PRIMARY KEY,
 	general_pres TEXT,
 	family_members VARCHAR(256),
 	favorite_stories INT

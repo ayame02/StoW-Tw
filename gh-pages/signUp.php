@@ -15,6 +15,7 @@
 						$firstName = $_POST["first_name"];
 						$lastName = $_POST["last_name"];
 						$nick = $_POST["nickname"];
+						$family_member = $_POST["familyM"];
 						$username = $_POST["username"];
 						$pwd = $_POST["password"];
 						$pwd2 = $_POST["password2"];
@@ -61,6 +62,14 @@
 
 						$sql = "INSERT INTO users(username, password, first_name, last_name, nickname) VALUES ('$username', '$pwd', '$firstName', '$lastName', '$nick')";
 						$result = $db->query($sql);
+						$sql2 = "SELECT user_id FROM users WHERE username = '$username'";
+						$result2 = $db->query($sql2);
+						while ($row2 = $result2->fetch_assoc()) {
+								$user_id = $row2['user_id'];
+								$sql3 = "INSERT INTO profile(user_id, family_members) VALUES('$user_id', '$family_member')";
+								$result3 = $db->query($sql3);
+						}
+
 						if ($result == TRUE){
 							echo ("You have been registered, yay!");
 							header ('Refresh: 2; URL=index.html');

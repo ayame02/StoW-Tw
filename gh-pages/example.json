@@ -1,0 +1,38 @@
+{
+    "title": "Hot tub time machine ",
+    "authors": [
+        {"number_of_primary_authors": 2},
+        {"number_of_secondary_authors": 2},
+        {"primary": "Jason MacKenzie"},
+        {"primary": "Namira MacKenzie"},
+        {"secondary": "Joe Biden"},
+        {"secondary": "Obama"}
+    ],
+    "cover_photo": "https://vignette.wikia.nocookie.net/lyricwiki/images/d/d5/Various_Artists_-_Hot_Tub_Time_Machine.jpg/revision/latest?cb=20140516211429",
+    "reccomended_age": 12,
+    "characters": [
+        {"number_of_characters": 5},
+        {"name": "Iloa Namie",
+        "role": "Primary",
+        "personality": "Boisterous and adventurous. A little bit of a troublemaker",
+        "minor_description": "Blue eyes, brown hair. Pale complexity, short and slim. Likes reading and playing with her brother.",
+        "_comment": "Everything but the name and role are optional."},
+        {"name": "Jason Namie",
+        "role": "Primary",
+        "_comment": "Name and role must not be blank."},
+        {"name": "Brock Wills",
+        "role": "Secondary"},
+        {"name": "Naizu Kimmie",
+        "role": "Secondary"},
+        {"name": "William Sand",
+        "role": "Primary"}
+    ],
+    "media_links": [
+        {"number_of_links": 2},
+        {"url": "http://broken.com/12345?Q=3"},
+        {"url": "https://www.youtube.com/watch?v=q1qykdkInRQ"}
+    ],
+    "_comment": "\n Represents the end of the line.",
+    "story_content":
+        "'Little duck, little duck, dost thou see, \n Hansel and Gretel are waiting for thee. \n There's never a plank, or bridge in sight, \n take us across on thy back so white.' \n The duck came to them, and Hansel seated himself on its back, and told his sister to sit by him. \n 'No,' replied Gretel, 'that will be too heavy for the little duck. She shall take us across, one after the other.'"
+}

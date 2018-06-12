@@ -20,10 +20,36 @@
     <div class="sidenav">
         <section>
             <p class="sidenav_bullet">Stories from around the world.</p>
-            <p class="stories">
-                <a href="storySandy.html">A little mouse</a>, uploaded by [Sandy].</p>
-            <p class="stories">
-                <a href="">The cat and the dog</a>, uploaded by [Carol]</p>
+            <?php
+                include ('databaseConn.php');
+                $db = new Database();
+                $dir = new DirectoryIterator("uploads/");
+                foreach ($dir as $fileinfo) {
+                    if (!$fileinfo->isDot()) {
+                        $story = $fileinfo->getFilename();
+                        $path_parts = pathinfo($story);
+                        $name = (int)$path_parts['filename'];
+                        $title = "";
+                        $nickname = "";
+                        $sql = "SELECT title, user FROM story WHERE story_id = $name";
+                        $result = $db->query($sql);
+                        while ($row = $result->fetch_assoc()){
+                            $title = $row['title'];
+                            $nickname = $row['user'];
+                        }
+                        $string = "<p class=";
+                        $string1 = "stories";
+                        $string2 = ">";
+                        $string3 = "<a href=";
+                        $string4 = ".html";
+                        $string7 = ">";
+                        $string5 = "</a>, uploaded by [";
+                        $string6 = "]. </p>";
+                        echo $string.$string1.$string2.$string3.$name.$string4.$string7.$title.$string5.$nickname.$string6;
+                    }
+                }
+            ?>
+            
         </section>
         <br>
         <p class="sidenav_bullet"></p>
@@ -34,10 +60,10 @@
             <p id="mobile_calendar-month-year"></p>
         </div>
     </div>
-    <div class = "search-container">
+    <form action="search.php" method="POST" class = "search-container">
         <input type="text" placeholder="Search" name = "search_text">
-        <button class = "search-container-image" type="submit" action = "search.php" method = "POST"><img src = "images/search_btn.png"></button>
-    </div>
+        <button class = "search-container-image" type="submit"><img src = "images/search_btn.png"></button>
+    </form>
     <section class="site_content">
         <div class="age_section">Ages 3-5</div>
         <div>

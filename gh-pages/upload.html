@@ -12,11 +12,13 @@
 <body>
     <img src="images/logo.png" class="logo">
     <div class="upper_menu_login">
-        <a href="index.html">Home</a>
+        <a href="loggedIn.html">Home</a>
     </div>
-    <form class = "form_login" action="upload.php" method="POST">
+    <form class = "form_login" action="upload.php" method="POST" enctype="multipart/form-data">
         <h3>File must be JSON/XML format. </h3>
-        <h3>And it must contain a field with the title.</h3><br>
+        <h3>And it must contain a field with the title.</h3>
+        <h3>Here is a <a href="example.json">JSON</a> example.</h3>
+        <h3>Here is an <a href="example.xml">XML</a> example.</h3><br>
         <h2>Select a file to upload:</h2>
         <br>
         <input type="file" name="fileToUpload">

@@ -84,12 +84,32 @@
 
 			public function get_fav_story($user)
 			{
-				$sql = "select title, story_image, main_author from story where story_id = (select favorite_stories from profile where user_id = (select user_id from users where username = '$user'))";
+				$sql = "select title, story_image from story where story_id = (select favorite_stories from profile where user_id = (select user_id from users where username = '$user'))";
 				$result = mysqli_query($this->mysql_con, $sql);
 				$user_data = mysqli_fetch_assoc ($result);
 				$_SESSION["title"] = $user_data["title"];
 				$_SESSION["url"] = $user_data["story_image"];
-				$_SESSION["author"] = $user_data["main_author"];
+				$title = $user_data["title"];
+				$sql = "select story_id from story where title = '$title'";
+				$result = mysqli_query($this->mysql_con, $sql);
+				$user_data = mysqli_fetch_assoc($result);
+				$s_id = $user_data["story_id"];
+				$name = "";
+				$sql = "select author_id from book_authors where story_id =". $s_id;
+				$result = mysqli_query($this->mysql_con, $sql);
+				if ($result){
+					$user_data = mysqli_fetch_assoc ($result);
+					$a_id = $user_data["author_id"];
+					$sql1 = "select name, role from authors where id = $a_id";
+					$res = mysqli_query($this->mysql_con, $sql1);
+					if ($res){
+						$data = mysqli_fetch_assoc ($res);
+						if (strcmp($data["role"], "primary") == 0){
+							$name = $data["name"];
+						}
+					}
+				}
+				$_SESSION["author"] = $name;
 			}
 			
 			public function delete_fav($user)

@@ -12,6 +12,7 @@ CREATE TABLE users(
 CREATE TABLE story(
 	story_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	title VARCHAR(256) NOT NULL,
+	user VARCHAR(256),
 	story_image VARCHAR(256),
 	reccomended_age INT(4)
 );

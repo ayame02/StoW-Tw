@@ -55,14 +55,6 @@
 				return $stat; 
 			}
 			
-			public function users_check($user, $pass){
-				$sql = "select username, password from users where username = '$user' and password = '$pass'";
-				$result = mysqli_query($this->mysql_con, $sql);
-				$user_data = mysqli_fetch_assoc ($result);
-				if ($user_data["username"] == $user and $user_data["password"] == $pass)
-					return 1;
-				return 0;
-			}
 			public function return_details($user){
 				$sql = "select first_name, last_name, nickname from users where username = '$user'";
 				$result = mysqli_query($this->mysql_con, $sql);

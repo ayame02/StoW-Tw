@@ -18,7 +18,6 @@
             session_start();
             if(ISSET($_SESSION['username'])){
                 echo "<a href="."upload.html".">Upload</a>";
-                echo "<a href="."profile.php".">Profile</a>";
             }
             else{
                 echo "<a href="."login.html".">Login</a>";
@@ -30,9 +29,12 @@
         <section>
             <p class="sidenav_bullet">Stories from around the world.</p>
                 <?php
-                    include ('databaseConn.php');
-                    $db = new Database();
                     $dir = new DirectoryIterator("uploads/");
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "-";
+                    $databaseName = "tw";
+				    $conn = new mysqli($servername, $username, $password, $databaseName);
                     foreach ($dir as $fileinfo) {
                         if (!$fileinfo->isDot()) {
                             $story = $fileinfo->getFilename();
@@ -40,12 +42,12 @@
                             $name = (int)$path_parts['filename'];
                             $title = "";
                             $nickname = "";
-                            $sql = "SELECT title, user FROM story WHERE story_id = $name";
-                            $result = $db->query($sql);
-                            while ($row = $result->fetch_assoc()){
-                                $title = $row['title'];
-                                $nickname = $row['user'];
-                            }
+                            $stmt = $conn->prepare("SELECT title, nickname FROM story WHERE story_id = ?;");
+                            $res = $stmt->bind_param("i", $name);
+                            $res = $stmt->execute();
+                            $stmt->store_result();
+                            $stmt->bind_result($title, $nickname);
+                            $stmt->fetch();
                             $string = "<p class=";
                             $string1 = "stories";
                             $string2 = ">";
@@ -55,6 +57,7 @@
                             $string5 = "</a>, uploaded by [";
                             $string6 = "]. </p>";
                             echo $string.$string1.$string2.$string3.$name.$string4.$string7.$title.$string5.$nickname.$string6;
+                            $stmt->close();
                         }
                     }
                 ?>
@@ -77,73 +80,77 @@
             $search = $_POST['search_text'];
             $var = 1;
             if (isset($_POST['search_text'])){
-                $var = 0;
-                $search_querry = "select story_id, story_image, title from story where LOWER(title) = LOWER('$search')";
-                $SearchResult = $db->query($search_querry);
-                if ($SearchResult){
-                    while ($row = $SearchResult->fetch_assoc()){
-                        $s_id = $row['story_id'];
-                        $string = "<div><div class=";
-                        $string1 = "story";
-                        $string2 = "><img src=";
-                        $string3 = $row['story_image'];
-                        $string4 = " class=";
-                        $string5 = "story_image";
-                        $string6 = "><a href=";
-                        $string7 = $row['title'];
-                        $string8 = ".html";
-                        $string9 = " class=";
-                        $string10 = "story_title";
-                        $string11 = ">".$string7."</a>";
-                        echo $string.$string1.$string2.$string3.$string4.$string5.$string6.$string7.$string8.$string9.$string10.$string11;
-                        $sql = "select author_id from book_authors where story_id = $s_id";
-                        $result = $db->query($sql);
-                        if ($result){
-                            while ($row3 = $result->fetch_assoc()){
-                                $a_id = $row3['author_id'];
-                                $sql1 = "select name from authors where role = 'Primary' and id = $a_id";
-                                $res = $db->query($sql1);
-                                if ($res){
-                                    while ($row1 = $res->fetch_assoc()){
-                                        $string12 = "story_author";
-                                        $string13 = "> By ";
-                                        $string14 = $row1['name'];
-                                        $string15 = "</p>";
-                                        echo "<p class=".$string12.$string13.$string14.$string15;
-                                    }
-                                }
-                            }
-                        }                        
+                
+                $stmt = $conn->prepare("select story_id, story_image, title from story where LOWER(title) = LOWER(?);");
+                if ($stmt){
+                    $var = 0;
+                    $res = $stmt->bind_param("s", $search);
+                    $res = $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($s_id, $string3, $title);
+                    $stmt->fetch();
+                    $string = "<div><div class=";
+                    $string1 = "story";
+                    $string2 = "><img src=";
+                    $string4 = " class=";
+                    $string5 = "story_image";
+                    $string6 = "><a href=";
+                    $string7 = str_replace(' ','', $title);
+                    $string8 = ".html";
+                    $string9 = " class=";
+                    $string10 = "story_title";
+                    $string11 = ">".$title."</a>";
+                    echo $string.$string1.$string2.$string3.$string4.$string5.$string6. $string7.$string8.$string9.$string10.$string11;
+                    $stmt->close();
+                    $stmt = $conn->prepare("select author_id from book_authors where story_id = ?;");
+                    $res = $stmt->bind_param("i", $s_id);
+                    $res = $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($a_id);
+                    $stmt->fetch();
+                    $stmt->close();
+                    $stmt = $conn->prepare("select name from authors where role = 'primary' and id = ?;");
+                    $res = $stmt->bind_param("i", $a_id);
+                    $res = $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($string14);
+                    while ($stmt->fetch()){
+                        $string12 = "story_author";
+                        $string13 = "> By ";
+                        $string15 = "</p>";
+                        echo "<p class=".$string12.$string13.$string14.$string15;
                     }
                 }
-                $search_querry2 = "select id, name from authors where LOWER(name) = LOWER('$search')";
-                $SearchResult2 = $db->query($search_querry2);
-                if ($SearchResult2){
+                $stmt->close();
+                $stmt = $conn->prepare("select id, name from authors where LOWER(name) = LOWER(?);");
+                if ($stmt){
                     $var = 0;
-                    while ($row = $SearchResult2->fetch_assoc()){
-                        $a_id = $row['id'];
-                        $name = $row['name'];
-                        $sql = "SELECT title, story_image from story WHERE story_id = (select story_id from book_authors where author_id = $a_id)";
-                        $res = $db->query($sql);
-                        if($res){
-                            while($row1 = $res->fetch_assoc()){
-                                $string = "<div><div class=";
-                                $string1 = "story";
-                                $string2 = "><img src=";
-                                $string3 = $row['story_image'];
-                                $string4 = " class=";
-                                $string5 = "story_image";
-                                $string6 = "><a href=";
-                                $string7 = $row['title'];
-                                $string8 = ".html";
-                                $string9 = " class=";
-                                $string10 = "story_title";
-                                $string11 = ">".$string7."</a><p class=";
-                                $string12 = "story_author";
-                                $string13 = "> By ";
-                                $string14 = $name."</p>";
-                                echo $string.$string1.$string2.$string3.$string4.$string5.$string6.$string7.$string8.$string9.$string10.$string11.$string12.$string13.$string14;
-                            }
+                    $res = $stmt->bind_param("s", $search);
+                    $res = $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($a_id, $name);
+                    while ($stmt->fetch()){
+                        $stmt2 = $conn->prepare("SELECT title, story_image from story WHERE story_id = (select story_id from book_authors where author_id = ?);");
+                        $res = $stmt2->bind_param("i", $a_id);
+                        $res = $stmt2->execute();
+                        $stmt2->store_result();
+                        $stmt2->bind_result($title, $string3);
+                        if($stmt2->fetch()){
+                            $string = "<div><div class=";
+                            $string1 = "story";
+                            $string2 = "><img src=";
+                            $string4 = " class=";
+                            $string5 = "story_image";
+                            $string6 = "><a href=";
+                            $string7 = str_replace(' ','', $title);
+                            $string8 = ".html";
+                            $string9 = " class=";
+                            $string10 = "story_title";
+                            $string11 = ">".$title."</a><p class=";
+                            $string12 = "story_author";
+                            $string13 = "> By ";
+                            $string14 = $name."</p>";
+                            echo $string.$string1.$string2.$string3.$string4.$string5.$string6.$string7.$string8.$string9.$string10.$string11.$string12.$string13.$string14;
                         }
                     }
                 }

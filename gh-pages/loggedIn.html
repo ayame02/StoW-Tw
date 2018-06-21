@@ -11,43 +11,63 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body onload="make_pages">
     <img src="images/logo.png" class="logo">
     <div class="upper_menu">
         <a href="upload.html">Upload</a>
-        <a href="profile.php">Profile</a>
+        <?php
+            session_start();
+            $servername = "localhost";
+			$username = "root";
+			$password = "-";
+			$databaseName = "tw";
+            $user = $_SESSION['username'];
+            $conn = new mysqli($servername, $username, $password, $databaseName);
+            $stmt = $conn->prepare("select story_id from story where user = ?;");
+			$result = $stmt->bind_param('s', $user);
+            $result = $stmt->execute();
+            if ($result == TRUE){
+                echo "<a href="."Admins.html".">Admins</a>";
+            }
+        ?>
     </div>
     <div class="sidenav">
         <section>
             <p class="sidenav_bullet">Stories from around the world.</p>
             <?php
-                include ('databaseConn.php');
-                $db = new Database();
-                $dir = new DirectoryIterator("uploads/");
-                foreach ($dir as $fileinfo) {
-                    if (!$fileinfo->isDot()) {
-                        $story = $fileinfo->getFilename();
-                        $path_parts = pathinfo($story);
-                        $name = (int)$path_parts['filename'];
-                        $title = "";
-                        $nickname = "";
-                        $sql = "SELECT title, user FROM story WHERE story_id = $name";
-                        $result = $db->query($sql);
-                        while ($row = $result->fetch_assoc()){
-                            $title = $row['title'];
-                            $nickname = $row['user'];
+                    $dir = new DirectoryIterator("uploads/");
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "-";
+                    $databaseName = "tw";
+                    $conn = new mysqli($servername, $username, $password, $databaseName);
+                    foreach ($dir as $fileinfo) {
+                        if (!$fileinfo->isDot()) {
+                            $story = $fileinfo->getFilename();
+                            $path_parts = pathinfo($story);
+                            $name = (int)$path_parts['filename'];
+                            $title = "";
+                            $nickname = "";
+                            $stmt = $conn->prepare("SELECT title, nickname FROM story WHERE story_id = ?;");
+                            $res = $stmt->bind_param("i", $name);
+                            $res = $stmt->execute();
+                            $stmt->store_result();
+                            $stmt->bind_result($title, $nickname);
+                            $stmt->fetch();
+                            $string = "<p class=";
+                            $string1 = "stories";
+                            $string2 = ">";
+                            $string3 = "<a href=";
+                            $string4 = ".html";
+                            $string7 = ">";
+                            $string5 = "</a>, uploaded by [";
+                            $string6 = "]. </p>";
+                            if ( $title !== '' and $nickname !== ''){
+                                echo $string.$string1.$string2.$string3.$name.$string4.$string7.$title.$string5.$nickname.$string6;
+                            }
+                            $stmt->close();
                         }
-                        $string = "<p class=";
-                        $string1 = "stories";
-                        $string2 = ">";
-                        $string3 = "<a href=";
-                        $string4 = ".html";
-                        $string7 = ">";
-                        $string5 = "</a>, uploaded by [";
-                        $string6 = "]. </p>";
-                        echo $string.$string1.$string2.$string3.$name.$string4.$string7.$title.$string5.$nickname.$string6;
                     }
-                }
             ?>
             
         </section>
@@ -66,109 +86,188 @@
     </form>
     <section class="site_content">
         <div class="age_section">Ages 3-5</div>
-        <div>
-            <div class="story">
-                <img src="images/noblegnarble.jpg" class="story_image">
-                <a href="NobleGnarble.html" class="story_title">The Journey of the Noble Gnarble</a>
-                <p class="story_author">By Daniel Errico</p>
-                <p class="story_description">The story of the noble gnarble, a small fish with big dreams! A gnarble left his cozy bed along the ocean
-                    floor. He dreamt about a place that he had never seen before! He headed to the surface for a glimpse
-                    of sun and sky.</p>
-            </div>
-            <div class="story">
-                <img src="images/bumbumbaloo.jpg" class="story_image">
-                <a href="BumBumBaLoo.html" class="story_title">The island of Bum Bum Ba Loo</a>
-                <p class="story_author">By Daniel Errico</p>
-                <p class="story_description">
-                    Follow two young explorers on a monorhyme (all the lines end in the same rhyme) adventure that takes you across the sea to
-                    the mysterious Island of Bum Bum Ba Loo. You'll meet the King and Queen, dance with Bum Bum Balites,
-                    and learn the secret to Bum Berry Goo! The only problem is finding your way back again... The Island
-                    of Bum Bum Ba Loo is a bedtime tale about discovery, with an ending to encourage the explorer in us all!
-                </p>
-            </div>
+        <div id = "age_35">
+
         </div>
         <div class="age_section">Ages 6-8 </div>
-        <div>
-            <div class="story">
-                <img src="images/adventuresBird.jpg" class="story_image">
-                <a href="AdventuresBird.html" class="story_title">The Adventures of Bird</a>
-                <p class="story_author">By Bob Harding-Jones</p>
-                <p class="story_description">Bird is his name. And he is a bird. Large, a little ugly and clumsy, but lovable. Eats too much junk food
-                    so has lost the ability to fly. Is befriended by two children and they embark on an adventure together.
-                </p>
-            </div>
-            <div class="story">
-                <img src="images/puzzleMaker.jpg" class="story_image">
-                <a href="ThePuzzleMaker.html" class="story_title">The Puzzle Maker</a>
-                <p class="story_author">By Nathan Oser</p>
-                <p class="story_description">
-                    It's spring, the first day of the new school year, and after taking a shortcut Karen discovers a fantastic hole-in-the-wall
-                    puzzle shop. The one puzzle that captures her heart is too expensive, and it's missing a piece. But Karen
-                    knows exactly what to do.
-                </p>
-            </div>
+        <div id = "age_68">
+            
         </div>
         <div class="age_section">Ages 9-15 </div>
-        <div>
-            <div class="story">
-                <img src="images/hanselandgretel.jpg" class="story_image">
-                <a href="HanselAndGretel.html" class="story_title">Hansel and Gretel</a>
-                <p class="story_author">By Amanda Askew</p>
-                <p class="story_description">Hansel and Gretel are the children of a poor woodcutter. When a great famine settles over the land, the woodcutter's
-                    wife decides to take the children into the woods and leave them there to fend for themselves, so that
-                    she and her husband do not starve to death, because the children eat too much.</p>
-            </div>
-            <div class="story">
-                <img src="images/thelittlemermaid.jpg" class="story_image">
-                <a href="TheLittleMermaid.html" class="story_title">The Little Mermaid</a>
-                <p class="story_author">By Michael Teitelbaum</p>
-                <p class="story_description">
-                    The Little Mermaid dwells in an underwater kingdom with her widowed father (the sea king or Mer-King), her dowager grandmother,
-                    and her five older sisters, each of whom had been born one year apart. When a mermaid turns fifteen,
-                    she is permitted to swim to the surface for the first time to glimpse the world above, and when the sisters
-                    become old enough, each of them visits the upper world one at a time every year. As each returns, the
-                    Little Mermaid listens longingly to their various descriptions of the world inhabited by human beings.
-                </p>
-            </div>
+        <div id = "age_914">
+           
         </div>
         <div class="age_section">Ages 15+</div>
-        <div>
-            <div class="story">
-                <img src="images/knightinshiningsuit.jpg" class="story_image">
-                <a href="KnightInShiningSuit.html" class="story_title">Knight in Shining Suit</a>
-                <p class="story_author">By Jerilee Kaye</p>
-                <p class="story_description">
-                    Sometimes, getting over pain and betrayal means Getting Up, Getting Even and Getting a Better Man.
-                    <p class="story_description">
-                        Astrid has planned out her perfect wedding. That is before she found out that her fiancé, Bryan, is cheating on her with
-                        her cousing-slash-best-friend-slash-maid-of-honor, Geena. And worse, Bryan got Geena pregnant. </p>
-                    <p class="story_description">Just when Astrid thought it couldn’t get any worse, she received a wedding invitation telling her that
-                        her wedding will happen exactly the way she planned it. Except that she is no longer going to be
-                        the bride!
-                    </p>
-                    <p class="story_description">
-                        So when her parents urged her to attend the wedding “as family”, she planned the perfect revenge. She will put on a show
-                        for everyone to see. She’ll show them that she moved on with a better man—handsome, smart, rich and
-                        crazy about her. She’s even willing to pay a guy to be her “Knight in Shining Armani”.
-                    </p>
-
-                </p>
-            </div>
-            <div class="story">
-                <img src="images/forbiddenLineage.jpg" class="story_image">
-                <a href="ForbiddenLineage.html" class="story_title">Forbidden Lineage</a>
-                <p class="story_author">By Recklis</p>
-                <p class="story_description">
-                    Crimsons survive off essence. They're a proud breed who coexist with Spirit Sifters, Witches and Humans, until their beast
-                    escapes. When Sofia meets Kai for the first time she is left wondering exactly what he is, for although
-                    he shares a similarity with the Crimson race, he is clearly different. Kai...well, his blood is toxic,
-                    and not only to Supernaturals but to Humans also. Always controlled through submission, the Guardians
-                    have managed to keep him a secret for centuries, but there is so much more to the innocent beast than
-                    what meets the eye.
-                </p>
-            </div>
+        <div id = "age_15">
+            
         </div>
     </section>
 </body>
 
 </html>
+
+<script>
+        function make_pages(){
+            var ajax = new XMLHttpRequest();
+            ajax.open("GET", "make_pages.php", true);
+            ajax.send();
+            ajax.onreadystatechange = function(){
+                    if(this.readyState == 4 && this.status == 200){
+                        var res = this.responseText;
+                    }
+            }
+        }
+    </script>
+
+<script>
+        //call ajax
+        var ajax = new XMLHttpRequest();
+        var method = "GET";
+        var url = "age_35.php";
+        var asyncronous = true;
+    
+        ajax.open(method, url, asyncronous);
+        //sending ajax req
+        ajax.send();
+    
+        //recv resp from data.php
+        ajax.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200)
+            {
+                var data = JSON.parse(this.responseText);
+                console.log(data);
+                var html = "<div>";
+                for (var a = 0; a < data.length; a++){
+                    var title = data[a].title;
+                    var story_image = data[a].story_image;
+                    var author = data[a].name;
+                    var desc = data[a].description;
+    
+                    html += "<div class=" + "story" + ">";
+                        html += "<img src=" + story_image + " class=" + "story_image" + ">";
+                        html += "<a href=" + title.replace(/\s/g, '') + ".html" + " class=" + "story_title" + ">" + title + "</a>";
+                        html += "<p class=" + "story_author" + ">By " + author + "</p>";
+                        if (desc) {
+                            html += "<p class=" + "story_description" + ">" + desc + "</p>";
+                        }
+                    html += "</div>";
+                }
+                html += "</div>"
+                document.getElementById("age_35").innerHTML = html;
+            }
+        }
+</script>
+<script>
+        //call ajax
+        var ajax = new XMLHttpRequest();
+        var method = "GET";
+        var url = "age_68.php";
+        var asyncronous = true;
+    
+        ajax.open(method, url, asyncronous);
+        //sending ajax req
+        ajax.send();
+    
+        //recv resp from data.php
+        ajax.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200)
+            {
+                var data = JSON.parse(this.responseText);
+                console.log(data);
+                var html = "<div>";
+                for (var a = 0; a < data.length; a++){
+                    var title = data[a].title;
+                    var story_image = data[a].story_image;
+                    var author = data[a].name;
+                    var desc = data[a].description;
+    
+                    html += "<div class=" + "story" + ">";
+                        html += "<img src=" + story_image + " class=" + "story_image" + ">";
+                        html += "<a href=" + title.replace(/\s/g, '') + ".html" + " class=" + "story_title" + ">" + title + "</a>";
+                        html += "<p class=" + "story_author" + ">By " + author + "</p>";
+                        if (desc) {
+                            html += "<p class=" + "story_description" + ">" + desc + "</p>";
+                        }
+                    html += "</div>";
+                }
+                html += "</div>"
+                document.getElementById("age_68").innerHTML = html;
+            }
+        }
+</script>
+<script>
+        //call ajax
+        var ajax = new XMLHttpRequest();
+        var method = "GET";
+        var url = "age_914.php";
+        var asyncronous = true;
+    
+        ajax.open(method, url, asyncronous);
+        //sending ajax req
+        ajax.send();
+    
+        //recv resp from data.php
+        ajax.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200)
+            {
+                var data = JSON.parse(this.responseText);
+                console.log(data);
+                var html = "<div>";
+                for (var a = 0; a < data.length; a++){
+                    var title = data[a].title;
+                    var story_image = data[a].story_image;
+                    var author = data[a].name;
+                    var desc = data[a].description;
+    
+                    html += "<div class=" + "story" + ">";
+                        html += "<img src=" + story_image + " class=" + "story_image" + ">";
+                        html += "<a href=" + title.replace(/\s/g, '') + ".html" + " class=" + "story_title" + ">" + title + "</a>";
+                        html += "<p class=" + "story_author" + ">By " + author + "</p>";
+                        if (desc) {
+                            html += "<p class=" + "story_description" + ">" + desc + "</p>";
+                        }
+                    html += "</div>";
+                }
+                html += "</div>"
+                document.getElementById("age_914").innerHTML = html;
+            }
+        }
+</script>
+<script>
+        //call ajax
+        var ajax = new XMLHttpRequest();
+        var method = "GET";
+        var url = "age_15.php";
+        var asyncronous = true;
+    
+        ajax.open(method, url, asyncronous);
+        //sending ajax req
+        ajax.send();
+    
+        //recv resp from data.php
+        ajax.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200)
+            {
+                var data = JSON.parse(this.responseText);
+                console.log(data);
+                var html = "<div>";
+                for (var a = 0; a < data.length; a++){
+                    var title = data[a].title;
+                    var story_image = data[a].story_image;
+                    var author = data[a].name;
+                    var desc = data[a].description;
+    
+                    html += "<div class=" + "story" + ">";
+                        html += "<img src=" + story_image + " class=" + "story_image" + ">";
+                        html += "<a href=" + title.replace(/\s/g, '') + ".html" + " class=" + "story_title" + ">" + title + "</a>";
+                        html += "<p class=" + "story_author" + ">By " + author + "</p>";
+                        if (desc) {
+                            html += "<p class=" + "story_description" + ">" + desc + "</p>";
+                        }
+                    html += "</div>";
+                }
+                html += "</div>"
+                document.getElementById("age_15").innerHTML = html;
+            }
+        }
+</script>

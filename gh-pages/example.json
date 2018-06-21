@@ -1,12 +1,12 @@
 {
     "title": "Hot tub time machine ",
     "authors": [
-        {"number_of_primary_authors": 2},
+        {"number_of_primary_authors": 1},
         {"number_of_secondary_authors": 2},
         {"primary": "Jason MacKenzie"},
-        {"primary": "Namira MacKenzie"},
         {"secondary": "Joe Biden"},
-        {"secondary": "Obama"}
+        {"secondary": "Obama"},
+        {"_comment": "There can only be one author."}
     ],
     "cover_photo": "https://vignette.wikia.nocookie.net/lyricwiki/images/d/d5/Various_Artists_-_Hot_Tub_Time_Machine.jpg/revision/latest?cb=20140516211429",
     "reccomended_age": 12,

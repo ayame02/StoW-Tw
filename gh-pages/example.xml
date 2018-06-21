@@ -2,23 +2,20 @@
 <book>
     <title> Hot tub time machine </title>
     <author_list>
-        <number_of_authors> 4 </number_of_authors>
+        <number_of_authors> 3 </number_of_authors>
         <author1>
             <role> Primary </role>
             <name> Jason MacKenzie</name>
         </author1>
         <author2>
-            <role> Primary </role>
-            <name> Namira MacKenzie </name>
+            <role> Secondary </role>
+            <name> Joe Biden </name>
         </author2>
         <author3>
             <role> Secondary </role>
-            <name> Joe Biden </name>
-        </author3>
-        <author4>
-            <role> Secondary </role>
             <name> Obama </name>
-        </author4>
+        </author3>
+        <comment> There can only be one primary author.</comment>
     </author_list>
     <cover_photo> https://vignette.wikia.nocookie.net/lyricwiki/images/d/d5/Various_Artists_-_Hot_Tub_Time_Machine.jpg/revision/latest?cb=20140516211429 </cover_photo>
     <reccomended_age> 12 </reccomended_age>

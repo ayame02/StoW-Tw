@@ -9,12 +9,21 @@
 		<div class="redirecting_content">
 			<?php
 				session_start();
-				include ('databaseConn.php');
-				$db = new Database();
 				$usernm = $_POST['username'];
 				$pass = $_POST['password'];
+				$servername = "localhost";
+				$username = "root";
+				$password = "-";
+				$databaseName = "tw";
+
+				$conn = new mysqli($servername, $username, $password, $databaseName);
+
+				
 				if (isset($_POST['username']) and isset($_POST['password'])){
-					if ($db->users_check($usernm, $pass) === 1){
+					$stmt = $conn->prepare("select username, password from users where username = ? and password = ?;");
+					$result = $stmt->bind_param("ss", $usernm, $pass);
+					$result = $stmt->execute();
+					if ($result == TRUE){
 						$_SESSION["username"] = $usernm;
 						echo ("<h2>Login success...Redirecting.</h2>");
 						header ('Refresh: 2; URL=loggedIn.html');

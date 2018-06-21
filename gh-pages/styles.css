@@ -134,6 +134,13 @@ p.stories {
     font-size: 90%;
     color: grey;
 }
+.modify-buttons-container {
+    position: absolute;
+    top: 18%;
+    left: 56%;
+    right: 10%;
+    margin: 0;
+}
 
 .search-container {
     position: absolute;
@@ -190,10 +197,35 @@ p.stories {
 
 .site_content2 {
     position: absolute;
-    margin-top: 12%;
+    margin-top: 13%;
     left: 18%;
     right: 10%;
     background: rgb(0, 0, 0, 0.7);
+}
+
+.site_content3 {
+    position: absolute;
+    margin-top: 2%;
+    left: 18%;
+    right: 10%;
+    background: rgb(0, 0, 0, 0.7);
+}
+
+.notification {
+    position: absolute;
+    margin-top: 10%;
+    left: 35%;
+    right: 50%;
+    background: rgb(0, 0, 0, 0.7);
+    display: none;
+}
+
+.modifier {
+    background: white;
+    left: 22%;
+    max-width: 540px;   
+    margin: 1%;
+    display: none;
 }
 
 .story_image {

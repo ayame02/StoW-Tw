@@ -1,0 +1,18 @@
+
+<body >
+    <section id = "modif">
+<form name="compForm" method="post" action="sample.php" >
+<input type="hidden" name="myDoc">
+
+
+<div id="textBox" contenteditable="true"><p>
+    <?php
+        $homepage = file_get_contents('C:\Apache24\htdocs\STOW\stories\3.txt');
+        echo $homepage;
+    ?>
+</p></div>
+<p><input type="submit" value="Send" /></p>
+</form>
+</section>
+</body>
+</html>
